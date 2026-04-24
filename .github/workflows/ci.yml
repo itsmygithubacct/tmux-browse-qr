@@ -1,0 +1,38 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out extension
+        uses: actions/checkout@v4
+        with:
+          path: extension
+
+      - name: Check out tmux-browse core at pinned version
+        uses: actions/checkout@v4
+        with:
+          repository: itsmygithubacct/tmux-browse
+          # Matches min_tmux_browse in manifest.json. This is the
+          # version that introduces the config_actions_extras and
+          # qr_modal slots this extension fills.
+          ref: v0.7.1.3
+          path: core
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Sanity check manifest + import
+        working-directory: extension
+        env:
+          PYTHONPATH: ${{ github.workspace }}/core:${{ github.workspace }}/extension
+        run: |
+          python3 -c "import qr; print('qr module importable')"
+          python3 -c "import qr_routes; print(len(qr_routes.register().get_routes), 'GET routes')"

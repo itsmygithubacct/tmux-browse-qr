@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools >= 64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tmux-browse-qr"
+version = "0.7.2"
+description = "QR config sharing for tmux-browse"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "itsmygithubacct" }]
+keywords = ["tmux", "qr", "config-share"]
+
+[project.urls]
+Homepage = "https://github.com/itsmygithubacct/tmux-browse-qr"
+Core = "https://github.com/itsmygithubacct/tmux-browse"
+
+[tool.setuptools.packages.find]
+include = ["qr*", "server*"]
+exclude = ["tests*"]
