@@ -25,16 +25,18 @@ audience.
 
 ## Install
 
-Same pattern as every other tmux-browse extension:
+Same pattern as every other tmux-browse extension. From the
+dashboard: **Config → Extensions → QR config share → Download
+and enable**. From the shell:
 
 ```bash
-# One-click via the dashboard
-#   Config → Extensions → QR config share → Download and enable
-
-# Headless
 cd tmux-browse
-make install-extension QR=1
+python3 -m lib.extensions install qr
 ```
+
+(Or, on a checkout that already has the qr submodule materialised
+via `git submodule update --init`, just
+`python3 -m lib.extensions enable qr`.)
 
 After install, restart the dashboard. The **Show QR** and
 **Read QR** buttons appear in the Config pane; the `/api/qr`
